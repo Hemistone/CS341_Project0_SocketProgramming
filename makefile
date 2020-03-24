@@ -5,9 +5,9 @@ SERVER = server
 
 all: client server
 
-client:
+client: client.o
 	$(CC) $(CFLAGS) client.c -o $(CLIENT)
-server:
+server: server.o
 	$(CC) $(CFLAGS) server.c -o $(SERVER)
 clean:
 	rm *.o $(CLIENT) $(SERVER)
