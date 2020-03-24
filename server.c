@@ -29,6 +29,11 @@ void *get_in_addr(struct sockaddr *sa) {
     return &(((struct sockaddr_in6 *)sa)->sin6_addr);
 }
 
+int sendTest(int fd) {
+    //sleep(3);
+    return send(fd, "Hello, World!", 13, 0);
+}
+
 int main(int argc, char *argv[]) {
     int sockfd, new_fd;
     struct addrinfo hints, *servinfo, *p;
@@ -96,7 +101,7 @@ int main(int argc, char *argv[]) {
         printf("server: got connection from %s\n", s);
         if (!fork()) {
             close(sockfd);
-            if (send(new_fd, "Hello, World!", 13, 0) == -1)
+            if (sendTest(new_fd) == -1)
                 perror("send");
             close(new_fd);
             exit(0);
